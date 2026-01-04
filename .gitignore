@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+
+# playwright
+test-results/
+playwright-report/
+
+# env
+.env
+
+# logs
+*.log
+
+# wsl / system junk
+.vscode-server/
+.npm/
+.cache/
+.gitconfig
+.lesshst
+.bash_history
