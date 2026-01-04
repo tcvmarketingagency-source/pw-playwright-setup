@@ -18,3 +18,4 @@ playwright-report/
 .gitconfig
 .lesshst
 .bash_history
+.vercel
