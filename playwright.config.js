@@ -5,6 +5,6 @@ module.exports = defineConfig({
     viewport: { width: 1280, height: 800 },
     navigationTimeout: 30000,
     actionTimeout: 10000,
-    headless: false,
+    headless: process.env.CI ? true : false,
   },
 });
