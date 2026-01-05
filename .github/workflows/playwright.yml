@@ -9,6 +9,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      ARIZE_API_KEY: ${{ secrets.ARIZE_API_KEY }}
+      PHOENIX_PROJECT_NAME: playwright-ci
+      PHOENIX_COLLECTOR_ENDPOINT: https://collector.arize.com/v1/traces
+      PHOENIX_ENABLE_TRACING: "true"
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,10 +30,5 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests (CI + Phoenix observer mode)
-        env:
-          ARIZE_API_KEY: ${{ secrets.ARIZE_API_KEY }}
-          PHOENIX_PROJECT_NAME: pw-playwright-setup-ci
-          PHOENIX_COLLECTOR_ENDPOINT: https://collector.arize.com/v1/traces
-          PHOENIX_ENABLE_TRACING: "true"
+      - name: Run Playwright tests
         run: npx playwright test
