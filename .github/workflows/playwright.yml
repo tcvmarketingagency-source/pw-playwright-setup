@@ -1,10 +1,9 @@
-name: Playwright Tests with Phoenix Tracing
+name: Playwright + Phoenix Tracing
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
 
 jobs:
   test:
@@ -14,31 +13,20 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
 
-      - name: Install Node dependencies
+      - name: Install dependencies
         run: npm ci
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install Phoenix + OpenTelemetry
-        run: |
-          python -m pip install --upgrade pip
-          pip install arize-phoenix opentelemetry-sdk opentelemetry-exporter-otlp
-
-      - name: Run Playwright tests with Phoenix tracing
+      - name: Run Playwright tests
         env:
           ARIZE_API_KEY: ${{ secrets.ARIZE_API_KEY }}
           PHOENIX_PROJECT_NAME: pw-playwright-setup-ci
           PHOENIX_COLLECTOR_ENDPOINT: https://collector.arize.com/v1/traces
-        run: |
-          npx playwright test
+        run: npx playwright test

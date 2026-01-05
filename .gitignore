@@ -19,3 +19,5 @@ playwright-report/
 .lesshst
 .bash_history
 .vercel
+*.pyc
+__pycache__/
